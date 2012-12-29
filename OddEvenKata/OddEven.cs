@@ -48,7 +48,7 @@ namespace OddEvenKata
                 if (number % i == 0)
                     return false;
             }
-            return number == 1 ? false : true;
+            return number != 1;
         }
     }
 
@@ -115,6 +115,13 @@ namespace OddEvenKata
         {
             var result = oddEven.PrintNumbersInRange(1, 10);
             result.Should().Be("Odd 2 3 Even 5 Even 7 Even Odd Even");
+        }
+
+        [Fact]
+        public void should_be_return_corect_string_in_range_1_20()
+        {
+            var result = oddEven.PrintNumbersInRange(1, 20);
+            result.Should().Be("Odd 2 3 Even 5 Even 7 Even Odd Even 11 Even 13 Even Odd Even 17 Even 19 Even");
         }
     }
 
