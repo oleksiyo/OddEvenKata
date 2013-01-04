@@ -32,9 +32,9 @@ namespace OddEvenKata
         {
             var dic = new Dictionary<Func<int, bool>, string>
             {
-                {param => IsPrimeNumber(param) == true, input.ToString()},
-                {param => IsEvenNumber(param) == true, even},
-                {param => IsOddNumber(param)==true, odd}
+                {IsPrimeNumber, input.ToString()},
+                {IsEvenNumber, even},
+                {IsOddNumber, odd}
             };
             return dic.First(pair => pair.Key(input)).Value;
         }
