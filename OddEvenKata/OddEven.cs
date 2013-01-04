@@ -1,31 +1,42 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace OddEvenKata
 {
     public class OddEven
     {
+        readonly List<string> listResult = new List<string>();
+
         const string odd = "Odd";
         const string even = "Even";
 
         public string PrintNumbersInRange(int startRange, int endRange)
         {
-            var result = string.Empty;
+            var listTypeNumbers = GetDigitTypeInRange(startRange, endRange);
+            return string.Join(" ", listTypeNumbers);
+        }
+
+        private IEnumerable<string> GetDigitTypeInRange(int startRange, int endRange)
+        {
             for (var i = startRange; i <= endRange; i++)
             {
-                if (i > startRange)
-                    result += " ";
-
-                if (IsPrimeNumber(i))
-                    result += i.ToString();
-
-                if (IsEvenNumber(i))
-                    result += even;
-
-                if (IsOddNumber(i))
-                    result += odd;
+                listResult.Add(DetermineTypeOfDigit(i));
             }
-            return result;
+            return listResult;
+        }
+
+        private static string DetermineTypeOfDigit(int input)
+        {
+            var dic = new Dictionary<Func<int, bool>, string>
+            {
+                {param => IsPrimeNumber(param) == true, input.ToString()},
+                {param => IsEvenNumber(param) == true, even},
+                {param => IsOddNumber(param)==true, odd}
+            };
+            return dic.First(pair => pair.Key(input)).Value;
         }
 
         private static bool IsOddNumber(int number)
@@ -61,6 +72,7 @@ namespace OddEvenKata
         {
             oddEven = new OddEven();
         }
+
         [Fact]
         public void should_print_Odd_when_input_1()
         {
