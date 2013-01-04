@@ -50,6 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DigitServices.cs" />
+    <Compile Include="IDigitServices.cs" />
     <Compile Include="OddEven.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
